@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+    <link rel="stylesheet" href="../resources/css/styles.css" type="text/css"/>
+</h:head>
+<h:body>
+    <nav class="navbar">
+        <h:link value="MyBatis Teams" outcome="teams"/>
+        <h:link value="Back to viewing teams" outcome="/index"/>
+    </nav>
+    <h2>#{updatePlayerDetails.player.name}</h2>
+    <h:form>
+        <h:outputText value="Player's role: "/>
+        <h:selectOneMenu value="#{updatePlayerDetails.player.role}" required="true">
+            <f:selectItem itemValue="Sniper" itemLabel="Sniper"/>
+            <f:selectItem itemValue="Rifler" itemLabel="Rifler"/>
+            <f:selectItem itemValue="Entry Fragger" itemLabel="Entry Fragger"/>
+            <f:selectItem itemValue="Support" itemLabel="Support"/>
+            <f:selectItem itemValue="Lurker" itemLabel="Lurker"/>
+        </h:selectOneMenu>
+        <h:commandButton value="update" action="#{updatePlayerDetails.updatePlayerRole()}">
+            <f:param name="playerId" value="#{updatePlayerDetails.player.id}" />
+        </h:commandButton>
+        <h:outputText value="Value was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
+    </h:form>
+</h:body>
+</html>

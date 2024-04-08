@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <link rel="stylesheet" href="resources/css/styles.css" type="text/css"/>
+</h:head>
+<h:body>
+    <nav class="navbar">
+        <h:link value="View all teams" outcome="index"/>
+        <h:link value="View all tournaments" outcome="tournament"/>
+        <h:link value="Add team" outcome="teamAdd"/>
+        <h:link value="Add tournament" outcome="tournamentAdd"/>
+        <h:link value="MyBatis view teams" outcome="myBatis/teams"/>
+    </nav>
+    <ui:repeat value="#{tournaments.allTournaments}" var="tournament">
+        <h1>#{tournament.name} (Tournament)</h1>
+        <table border="1">
+            <tr>
+                <th>Teams</th>
+                <!-- Add more headers as needed -->
+            </tr>
+            <ui:repeat value="#{tournament.teams}" var="team">
+                <tr>
+                    <td><h:link value="#{team.name}" outcome="players?teamId=#{team.id}" /></td>
+                    <!-- Add more columns for additional team information -->
+                </tr>
+            </ui:repeat>
+        </table>
+    </ui:repeat>
+</h:body>
+</html>

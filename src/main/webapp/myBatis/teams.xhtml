@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head/>
+<h:head>
+    <link rel="stylesheet" href="../resources/css/styles.css" type="text/css"/>
+</h:head>
+<h:body>
+    <nav class="navbar">
+        <h:link value="MyBatis Teams" outcome="teams"/>
+        <h:link value="Back to viewing teams" outcome="/index"/>
+    </nav>
+    <h2>Teams:</h2>
+    <ol>
+        <ui:repeat value="#{teamsMyBatis.allTeams}" var="team">
+            <li><h:link value="#{team.name}" outcome="players?teamId=#{team.id}" /></li>
+
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText value="#{teamsMyBatis.teamToCreate.name}" required="true" />
+        <h:commandButton value="Add new team" action="#{teamsMyBatis.createTeam}" />
+    </h:form>
+</h:body>
+</html>

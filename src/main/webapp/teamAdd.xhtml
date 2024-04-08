@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head>
+    <link rel="stylesheet" href="resources/css/styles.css" type="text/css"/>
+    <title>Add a New Team</title>
+</h:head>
+<h:body>
+    <nav class="navbar">
+        <h:link value="View all teams" outcome="index"/>
+        <h:link value="View all tournaments" outcome="tournament"/>
+        <h:link value="Add team" outcome="teamAdd"/>
+        <h:link value="Add tournament" outcome="tournamentAdd"/>
+        <h:link value="MyBatis view teams" outcome="myBatis/teams"/>
+    </nav>
+    <h3>Add a new team:</h3>
+    <h:form>
+        <h:inputText value="#{teams.teamToCreate.name}" required="true" />
+        <h:selectManyCheckbox id="chooseTournaments" value="#{teams.teamToCreate.tournaments}">
+            <f:selectItems value="#{tournaments.allTournaments}" var="tournament" itemValue="#{tournament}" itemLabel="#{tournament.name}"/>
+        </h:selectManyCheckbox>
+        <h:commandButton value="Add new team" actionListener="#{teams.createTeam}" action="index?faces-redirect=true"/>
+    </h:form>
+</h:body>
+</html>
