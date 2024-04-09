@@ -28,7 +28,7 @@ public class Teams {
     public void init(){
         loadAllTeams();
     }
-    
+
     @Transactional
     public void createTeam(){
         this.teamsDAO.persist(teamToCreate);
