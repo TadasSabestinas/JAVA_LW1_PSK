@@ -30,7 +30,7 @@
         <h:commandButton value="update" action="#{updatePlayerDetails.updatePlayerRole()}">
             <f:param name="playerId" value="#{updatePlayerDetails.player.id}" />
         </h:commandButton>
-        <h:outputText value="Value was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
+        <h:outputText style="color: red" value="Role was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
     </h:form>
 
     <h:link outcome="index" value="Back to home page"/>
