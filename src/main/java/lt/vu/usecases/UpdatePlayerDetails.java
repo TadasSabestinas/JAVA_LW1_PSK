@@ -6,6 +6,8 @@ import lombok.Setter;
 import lt.vu.interceptors.LoggedInvocation;
 import lt.vu.persistence.PlayersDAO;
 import lt.vu.entities.Player;
+import lt.vu.services.IContractGenerator;
+import lt.vu.services.Producer;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
@@ -27,6 +29,10 @@ public class UpdatePlayerDetails implements Serializable {
     @Inject
     private PlayersDAO playersDAO;
 
+    @Inject
+    @Producer
+    IContractGenerator contractGenerator;
+
     @PostConstruct
     private void init() {
         System.out.println("UpdatePlayerDetails INIT CALLED");
@@ -38,7 +44,7 @@ public class UpdatePlayerDetails implements Serializable {
 
     @Transactional
     @LoggedInvocation
-    public String updatePlayerRole() {
+    public String updatePlayerName() {
         try{
             playersDAO.update(this.player);
         } catch (OptimisticLockException e) {
@@ -53,5 +59,9 @@ public class UpdatePlayerDetails implements Serializable {
     public String handleOptimisticLockException() {
         this.player = playersDAO.findOne(this.player.getId());
         return "/playerDetails.xhtml?faces-redirect=true&playerId=" + player.getId() + "&error=optimistic-lock-exception";
+    }
+
+    public String getContract(){
+        return contractGenerator.generateContract();
     }
 }

@@ -6,7 +6,15 @@
                       http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
         bean-discovery-mode="annotated">
 
+    <alternatives>
+        <class>lt.vu.services.AlternativeNickNameGenerator</class>
+    </alternatives>
+
     <interceptors>
         <class>lt.vu.interceptors.MethodLogger</class>
     </interceptors>
+
+    <decorators>
+        <class>lt.vu.services.ContractGeneratorEuros</class>
+    </decorators>
 </beans>

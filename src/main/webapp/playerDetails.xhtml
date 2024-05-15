@@ -19,7 +19,8 @@
 
     <h2>#{updatePlayerDetails.player.name}</h2>
     <h:form>
-        <h:outputText value="Player's role: "/>
+        <h:outputText value="Edit Player's name and role: "/>
+        <h:inputText a:placeholder="enter the value" value="#{updatePlayerDetails.player.name}" required="true" />
         <h:selectOneMenu value="#{updatePlayerDetails.player.role}" required="true">
             <f:selectItem itemValue="Sniper" itemLabel="Sniper"/>
             <f:selectItem itemValue="Rifler" itemLabel="Rifler"/>
@@ -27,11 +28,26 @@
             <f:selectItem itemValue="Support" itemLabel="Support"/>
             <f:selectItem itemValue="Lurker" itemLabel="Lurker"/>
         </h:selectOneMenu>
-        <h:commandButton value="update" action="#{updatePlayerDetails.updatePlayerRole()}">
+        <h:commandButton value="update" action="#{updatePlayerDetails.updatePlayerName()}">
             <f:param name="playerId" value="#{updatePlayerDetails.player.id}" />
         </h:commandButton>
         <h:outputText style="color: red" value="Role was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
     </h:form>
+
+    <br/>
+    <h:form>
+        <h:commandButton value="Generate player name"
+                         disabled="#{generatePlayerNickname.nickNameGenerationRunning}"
+                         action="#{generatePlayerNickname.generateNickName}">
+            <f:param name="playerId" value="#{updatePlayerDetails.player.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:outputText value="#{generatePlayerNickname.getNickNameGenerationStatus()}"/>
+    <br/>
+
+    <h3>Player contract: </h3>
+    <h:outputText value="#{updatePlayerDetails.getContract()}"/>
+    <br/>
 
     <h:link outcome="index" value="Back to home page"/>
 </h:body>
