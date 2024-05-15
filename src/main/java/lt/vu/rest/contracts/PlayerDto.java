@@ -6,9 +6,9 @@ import lombok.Setter;
 @Getter @Setter
 public class PlayerDto {
 
-    private String Name;
+    private String name;
 
-    private Integer JerseyNumber;
+    private String teamName;
 
-    private String TeamName;
+    private String role;
 }

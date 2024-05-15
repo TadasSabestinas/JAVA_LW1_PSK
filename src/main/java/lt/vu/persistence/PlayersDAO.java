@@ -23,4 +23,6 @@ public class PlayersDAO {
     public Player update(Player player){
         return em.merge(player);
     }
+
+
 }
